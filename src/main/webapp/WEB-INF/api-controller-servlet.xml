@@ -1,0 +1,32 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<mvc:resources mapping="/properties/**" location="/WEB-INF/properties/"/>
+	<mvc:default-servlet-handler />
+	<import resource="classpath*:beans.xml"></import>
+	<mvc:annotation-driven />
+	<context:component-scan
+		base-package="com.intellect.igtb.ipsh.api,com.intellect.ipsh.stpframework.cbx" />
+
+	<bean id="paymentRestController"
+		class="com.intellect.igtb.ipsh.api.controller.PaymentRestController">
+		<property name="paymentsApiService" ref="paymentsApiService" />
+	</bean>
+
+	<bean id="paymentsApiService"
+		class="com.intellect.igtb.ipsh.api.processor.PaymentsApiServiceImpl">
+		<property name="cutoffTimeInquiryAPI" ref="cutoffTimeInquiryAPI" />
+		<property name="derivePaymentProductListInquiryAPI" ref="derivePaymentProductListInquiryAPI" />
+		<property name="paymentProductEnquiry" ref="paymentProductEnquiry" />
+		<property name="paymentValueDateEnquiryAPI" ref="paymentValueDateEnquiryAPI" />
+		<property name="validateSingleTransactionAPI" ref="validateSingleTransactionAPI" />
+		<property name="supportingDocUploadValidationAPI" ref="supportingDocUploadValidationAPI" />
+		<property name="paymentTypeInquiryAPI" ref="paymentTypeInquiryAPI" />
+		<property name="standingInstructionValidationApi" ref="standingInstructionValidationApi" />
+		<property name="stopPaymentValidationAPI" ref="stopPaymentValidationAPI" />
+	</bean>
+</beans>
+
